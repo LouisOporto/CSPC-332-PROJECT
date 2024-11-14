@@ -1,8 +1,8 @@
 <html>
   <body>
     <?php
+
     // username and password need to be replaced by your username and password
-    // dbname is the smae as your usernmae
     $hostname = "localhost";
     $username = "root";
     $password = "password";
@@ -18,12 +18,11 @@
 
 
     // Test query
-    $query = "SELECT * FROM STUDENT WHERE ssn=" .$_POST["sno"];
+    $query = "SELECT * FROM PROFESSOR WHERE ssn=" .$_POST["ssn"];
     $result = $link->query($query);
     $row = $result->fetch_assoc();
     printf("SSN: %s<br>\n", $row["ssn"]);
-    printf("First NAME: %s<br>\n", $row["fname"]);
-    printf("Last NAME: %s<br>\n", $row["lname"]);
+    printf("NAME: %s<br>\n", $row["name"]);
     $result->free_result();
     $link->close();
     ?>
