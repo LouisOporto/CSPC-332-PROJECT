@@ -27,7 +27,7 @@ CREATE TABLE SECTIONS (
 CREATE TABLE RECORDS (
 	SNUM char(7),
     CWID numeric(9),
-    GRADE enum('A', 'B', 'C', 'D', 'F', 'W'),
+    GRADE char(2);
     primary key(SNUM, CWID)
 );
 
