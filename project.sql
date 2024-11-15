@@ -106,8 +106,7 @@ FROM PROFESSOR;
 
 DROP DATABASE sysdb;
 
-
-
+DROP TABLE *;
 
 
     
