@@ -17,8 +17,8 @@ CREATE TABLE PROFESSOR (
 CREATE TABLE SECTIONS (
 	snum char(7) primary key,
     numseats numeric(2),
-    begintime timestamp,
-    endtime timestamp,
+    begintime dateTime,
+    endtime dateTime,
     classroom numeric(3),
     coursenum char(7),
     profssn numeric(9)
@@ -105,8 +105,6 @@ FROM PROFESSOR;
 -- Quick Remove certain tabs
 
 DROP DATABASE sysdb;
-
-DROP TABLE *;
 
 
     
