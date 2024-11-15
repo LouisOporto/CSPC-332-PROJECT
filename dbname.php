@@ -1,3 +1,11 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>
+Response
+</title>
+</head>
+<body>
 <?php
 
 $ssn = $_POST["ssn"];
@@ -24,9 +32,13 @@ echo "Connection successful\n";
 $query = "SELECT * FROM PROFESSOR WHERE ssn=$ssn";
 $result = $link->query($query);
 $row = $result->fetch_assoc();
-printf("ssn: %s\n", $row["ssn"]);
-printf("name: %s\n", $row["name"]);
-echo "Professor ";
-echo $row["name"];
+printf("<p>ssn: %s\n</p>", $row["ssn"]);
+printf("<p>name: %s\n</p>", $row["name"]);
+
+echo "<p>Professor ", $row["name"], "</p";
 $result->free_result();
 $link->close();
+?>
+</body>
+</html>
+
