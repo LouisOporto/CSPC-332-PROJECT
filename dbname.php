@@ -8,8 +8,8 @@ Response
 <body>
 <?php
 
-// $ssn = $_POST["ssn"];
-$ssn = '12345678';
+$ssn = $_POST["ssn"];
+// $ssn = '123456789';
 
 // username and password need to be replaced by your username and password
 $hostname = "localhost";
@@ -30,7 +30,8 @@ echo "Connection successful\n";
 
 $query = "SELECT * FROM PROFESSOR WHERE ssn=$ssn";
 $result = $link->query($query);
-if($result) {
+if(!$result) { // Doesnt work yet
+  echo "<link> <a href='http://localhost/input.html'>Back to main page</a> </link>";
   die("Query failed: " . $link->error);
 }
 
