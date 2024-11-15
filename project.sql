@@ -92,15 +92,11 @@ INSERT INTO PROFESSOR VALUES (
     5621231234
     );
     
-    
-    
-    
 -- Show tables --
 SHOW TABLES;
 
 SELECT *
 FROM PROFESSOR;
-
 
 -- Quick Remove certain tabs
 
