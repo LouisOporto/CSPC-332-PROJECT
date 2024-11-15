@@ -1,30 +1,26 @@
-<html>
-  <body>
-    <?php
+<?php
 
-    // username and password need to be replaced by your username and password
-    $hostname = "localhost";
-    $username = "root";
-    $password = "password";
-    $dbname = "sysdb";
+// username and password need to be replaced by your username and password
+$hostname = "localhost";
+$username = "root";
+$password = "password";
+$dbname = "sysdb";
 
-    // Create connection
-    $link = mysqli_connect($hostname, $username, $password, $dbname);
+// Create connection
+$link = mysqli_connect($hostname, $username, $password, $dbname);
 
-    if(!$link) {
-      die("Connection failed: " . mysql_error());
-    }
-    echo "Connection successful<p>";
+if(!$link) {
+  die("Connection failed: " . mysql_error());
+}
+echo "Connection successful\n";
 
 
-    // Test query
-    $query = "SELECT * FROM PROFESSOR WHERE ssn=" .$_POST["ssn"];
-    $result = $link->query($query);
-    $row = $result->fetch_assoc();
-    printf("SSN: %s<br>\n", $row["ssn"]);
-    printf("NAME: %s<br>\n", $row["name"]);
-    $result->free_result();
-    $link->close();
-    ?>
-  </body>
-</html>
+// Test query
+$query = "SELECT * FROM PROFESSOR WHERE ssn='123456789'"; // Should post Professor Wang database if added
+// $query = "SELECT * FROM PROFESSOR WHERE ssn=" .$_POST["ssn"];
+$result = $link->query($query);
+$row = $result->fetch_assoc();
+printf("ssn: %s\n", $row["ssn"]);
+printf("name: %s\n", $row["name"]);
+$result->free_result();
+$link->close();
