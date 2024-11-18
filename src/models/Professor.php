@@ -27,13 +27,13 @@ class Professor {
     }
 
     // Function for grade distribution given a course section
-    public function getGradeDistribution($courseNum, $sectionNum) {
+    public function getGradeDistribution($sectionNum, $courseNum) {
       // Prepare the SQL query
       $stmt = $this->db->prepare("
-        SELECT GRADE, COUNT(*) AS grade_count
-        FROM RECORDS
-        WHERE SNUM = ? AND COURSE_NUM = ?
-        GROUP BY GRADE
+        SELECT grade, COUNT(*) AS grade_count
+        FROM RECORDS, COURSE, SECTIONS
+        WHERE RECORDS.snum = ? AND COURSE.cnum = ? AND SECTIONS.coursenum = COURSE.cnum
+        GROUP BY grade
       ");
       // Prepare and bind parameters.
       $stmt->bind_param("ss", $sectionNum, $courseNum);
