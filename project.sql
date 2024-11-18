@@ -114,6 +114,30 @@ INSERT INTO MEETING_DAYS VALUES (
 	47389,
     '12:10:10'
 );
+
+INSERT INTO MEETING_DAYS VALUES (
+	47389,
+    '10:10:10'
+);
+
+INSERT INTO RECORDS VALUES (
+	47389,
+	12345689,
+    'A+'
+);
+
+INSERT INTO RECORDS VALUES (
+	47389,
+	123456887,
+    'A+'
+);
+   
+INSERT INTO RECORDS VALUES (
+	47389,
+	123456787,
+    'A'
+);
+
 -- Show tables --
 SHOW TABLES;
 
@@ -129,11 +153,9 @@ INNER JOIN MEETING_DAYS MD ON MD.snum = SECTIONS.snum;
 
 -- Given a course number and a section number, count how many students  get each distinct, i.e. 'A', 'A-', 'B+', 'B', 'B', etc.->
 SELECT grade, COUNT(*) AS grade_count
-FROM RECORDS, COURSE
-WHERE SNUM = ? AND COURSE_NUM = ?
+FROM RECORDS, COURSE, SECTIONS
+WHERE RECORDS.snum = '47389' AND COURSE.cnum = 'CPSC332' AND SECTIONS.coursenum = COURSE.cnum
 GROUP BY grade;
-
-
 
 -- Quick Remove certain tabs
 DROP DATABASE sysdb;
