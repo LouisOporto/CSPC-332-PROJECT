@@ -15,17 +15,17 @@ CREATE TABLE PROFESSOR (
 );
 
 CREATE TABLE SECTIONS (
-	snum char(7) primary key,
+	snum numeric(5) primary key,
     numseats numeric(2),
-    begintime dateTime,
-    endtime dateTime,
+    begintime time,
+    endtime time,
     classroom numeric(3),
     coursenum char(7),
     profssn numeric(9)
 );
 
 CREATE TABLE RECORDS (
-	snum char(7),
+	snum numeric(5),
     cwid numeric(9),
     grade char(2),
     primary key(snum, cwid)
@@ -36,7 +36,7 @@ CREATE TABLE COURSE (
     title varchar(20),
     units tinyint,
     textbook varchar(50),
-    dnum numeric(4)
+    dnum char(4)
 );
 
 CREATE TABLE STUDENT (
@@ -45,11 +45,11 @@ CREATE TABLE STUDENT (
     lname varchar(20),
     phonenumber numeric(10),
     address varchar(20),
-    majordeptnum numeric(4)
+    majordeptnum char(4)
 );
 
 CREATE TABLE DEPARTMENT (
-	dnum numeric(4) primary key,
+	dnum char(4) primary key,
     name varchar(20),
     phonenumber numeric(10),
     officelocation varchar(20),
@@ -57,8 +57,8 @@ CREATE TABLE DEPARTMENT (
 );
 
 CREATE TABLE MINOR_IN (
-	studentcwid numeric(4) primary key,
-    minordeptnum numeric(4)
+	studentcwid numeric(9) primary key,
+    minordeptnum char(4)
 );
 
 CREATE TABLE COLLEGE_DEGREES (
@@ -67,13 +67,13 @@ CREATE TABLE COLLEGE_DEGREES (
 );
 
 CREATE TABLE MEETING_DAYS (
-	snum numeric(7) primary key,
+	snum numeric(5),
     meetingdate time
 );
 
 CREATE TABLE PREQUISITE_COURSES (
-	cnum numeric(7) primary key,
-    prereqnum numeric(7)
+	cnum char(7) primary key,
+    prereqnum char(7)
 );
 
 -- Insert values into tables here --
@@ -91,12 +91,43 @@ INSERT INTO PROFESSOR VALUES (
     1,
     5621231234
     );
-    
+
+INSERT INTO SECTIONS VALUES (
+	47389,
+    20,
+    '01:00:00',
+    '02:15:00',
+    351,
+    'CPSC332',
+    123456789
+);
+
+INSERT INTO COURSE VALUES (
+	'CPSC332',
+    'Database Structure',
+    3,
+    'database book',
+    'CPSC'
+);
+
+INSERT INTO MEETING_DAYS VALUES (
+	47389,
+    '12:10:10'
+);
 -- Show tables --
 SHOW TABLES;
 
 SELECT *
 FROM PROFESSOR;
+
+SELECT SECTIONS.snum, SECTIONS.classroom, SECTIONS.begintime, SECTIONS.endtime, meetingdate
+FROM SECTIONS
+INNER JOIN MEETING_DAYS MD ON MD.snum = SECTIONS.snum
+-- WHERE COURSE.cnum = SECTIONS.coursenum AND SECTIONS.profssn = 123456789;
+
+JOIN MEETING_DAYS ON SECTIONS.snum = MEETING_DAYS.snum
+WHERE SECTIONS.coursenum = COURSE.cnum AND MEETING_DAYS.snum = SECTIONS.snum AND SECTIONS.profssn = 123456789;
+GROUP BY SECTIONS.snum;
 
 -- Quick Remove certain tabs
 
