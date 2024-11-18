@@ -1,5 +1,5 @@
 <?php
-$db = new mysqli('localhost', 'root', '', 'sysdb');
+$db = new mysqli('localhost', 'root', '', 'sysdb'); // Adjust 'sysdb' to your database name
 
 // Check connection
 if ($db->connect_error) {
