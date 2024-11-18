@@ -17,7 +17,7 @@ class Professor {
         WHERE SECTIONS.profssn = ?
       ");
       // Prepare and bind parameters.
-      $stmt->bind_param('s', $ssn);
+      $stmt->bind_param("s", $ssn);
       // Set parameters and execute.
       $stmt->execute();
       // Get result set.
