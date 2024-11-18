@@ -19,5 +19,13 @@ class Course {
         $result = $stmt->get_result();
         return $result->fetch_assoc();
     }
+
+    // Method to list all courses in the system (optional)
+    public function getAllCourses() {
+        $stmt = $this->db->prepare("SELECT CNUM, TITLE, UNITS FROM COURSE");
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
 }
 ?>
