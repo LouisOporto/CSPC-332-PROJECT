@@ -10,13 +10,14 @@ class Professor {
     public function getClassSchedule($ssn) {
       // Prepare SQL query.
       $stmt = $this->db->prepare("
-        SELECT SECTIONS.SNUM, SECTIONS.CLASSROOM, SECTIONS.BEGINTIME, SECTIONS.ENDTIME, SECTIONS.MEETING_DAYS, COURSE.TITLE
+        SELECT SECTIONS.snum, SECTIONS.classroom, SECTIONS.begintime, SECTIONS.endtime, meetingdate
         FROM SECTIONS
-        JOIN COURSE ON SECTIONS.COURSENUM = COURSE.CNUM
-        WHERE SECTIONS.PROFSSN = ?
+        JOIN MEETING_DAYS MD ON MD.snum = SECTIONS.snum
+        JOIN COURSE ON COURSE.cnum = SECTIONS.coursenum
+        WHERE SECTIONS.profssn = ?
       ");
       // Prepare and bind parameters.
-      $stmt->bind_param("s", $ssn);
+      $stmt->bind_param('s', $ssn);
       // Set parameters and execute.
       $stmt->execute();
       // Get result set.
