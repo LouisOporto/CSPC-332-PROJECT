@@ -91,10 +91,10 @@ INSERT INTO PROFESSOR VALUES (
     1,
     5621231234
     );
-    
-    
-    
-    
+
+
+
+
 -- Show tables --
 SHOW TABLES;
 
@@ -105,9 +105,3 @@ FROM PROFESSOR;
 -- Quick Remove certain tabs
 
 DROP DATABASE sysdb;
-
-
-
-
-
-    
