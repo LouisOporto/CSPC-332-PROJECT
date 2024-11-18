@@ -18,24 +18,31 @@
     if(!$link) {
       die("Connection failed: " . mysql_error());
     }
-    echo "Connection successful<p>";
+    echo "Connection successful<p>\n";
 
 
     // Test query
-    $query = "SELECT * FROM PROFESSOR WHERE ssn=" .$ssn;
-    $result = $link->query($query);
-    $row = $result->fetch_assoc();
-    printf("SSN: %s<br>\n", $row["ssn"]);
-    printf("NAME: %s<br>\n", $row["name"]);
-    $result->free_result();
+    // $query = "SELECT * FROM PROFESSOR WHERE ssn=" .$ssn;
+    // $result = $link->query($query);
+    // $row = $result->fetch_assoc();
+    // printf("SSN: %s<br>\n", $row["ssn"]);
+    // printf("NAME: %s<br>\n", $row["name"]);
+    // $result->free_result();
     
     include("src/models/Professor.php");
     
     $professor = new Professor($link);
     
     $result = $professor->getClassSchedule($ssn);
-    printf("SNUM: %s\n", $result[0]["snum"]);
-    printf("MEETING DATE: %s\n", $result[0]["meetingdate"]);
+    foreach($result as $row) {
+        printf("SNUM: %s, CLASSROOM: %s, BEGINTIME: %s, ENDTIME: %s, MEETINGDATE: %s\n", $row["snum"], $row["classroom"], $row["begintime"], $row["endtime"], $row["meetingdate"]);
+    }
+
+    printf("\n");
+    $result = $professor->getGradeDistribution('47389', 'CPSC332');
+    foreach($result as $row) {
+        printf("GRADE: %s, COUNT: %s\n", $row["grade"], $row["grade_count"]);
+    }
 
     $link->close();
     ?>
