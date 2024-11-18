@@ -14,14 +14,33 @@ class Professor {
         FROM SECTIONS
         JOIN COURSE ON SECTIONS.COURSENUM = COURSE.CNUM
         WHERE SECTIONS.PROFSSN = ?
-        ");
-        // Prepare and bind parameters.
-        $stmt->bind_param("s", $ssn);
-        // Set parameters and execute.
-        $stmt->execute();
-        // Get result set.
-        $result = $stmt->get_result();
-        // Get all results and associate them.
-        return $result->fetch_all(MYSQLI_ASSOC);
+      ");
+      // Prepare and bind parameters.
+      $stmt->bind_param("s", $ssn);
+      // Set parameters and execute.
+      $stmt->execute();
+      // Get result set.
+      $result = $stmt->get_result();
+      // Get all results and associate them.
+      return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    // Function for grade distribution given a course section
+    public function getGradeDistribution($courseNum, $sectionNum) {
+      // Prepare the SQL query
+      $stmt = $this->db->prepare("
+        SELECT GRADE, COUNT(*) AS grade_count
+        FROM RECORDS
+        WHERE SNUM = ? AND COURSE_NUM = ?
+        GROUP BY GRADE
+      ");
+      // Prepare and bind parameters.
+      $stmt->bind_param("ss", $sectionNum, $courseNum);
+      // Execution.
+      $stmt->execute();
+      // Get the result set.
+      $result = $stmt->get_result();
+      // Fetch and association.
+      return $result->fetch_all(MYSQLI_ASSOC);
     }
 }
