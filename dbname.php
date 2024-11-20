@@ -1,6 +1,12 @@
+<!DOCTYPE html>
 <html>
-  <body>
-    <?php
+<head>
+<title>
+Response
+</title>
+</head>
+<body>
+<?php
 
     // if($_POST["ssn"]) {
     //     $ssn = $_POST["ssn"];
@@ -12,8 +18,11 @@
     $password = "";
     $dbname = "sysdb"; // Server on-campus is "mariadb"
 
-    // Create connection
-    $link = mysqli_connect($hostname, $username, $password, $dbname);
+// username and password need to be replaced by your username and password
+$hostname = "localhost";
+$username = "root";
+$password = ""; // Default for xampp (if your using that)
+$dbname = "sysdb";
 
     if(!$link) {
       die("Connection failed: " . mysql_error());
