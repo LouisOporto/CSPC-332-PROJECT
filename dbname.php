@@ -8,8 +8,15 @@ Response
 <body>
 <?php
 
-$ssn = $_POST["ssn"];
-// $ssn = '123456789';
+    // if($_POST["ssn"]) {
+    //     $ssn = $_POST["ssn"];
+    // }
+    $ssn = "123456789";
+    // username and password need to be replaced by your username and password
+    $hostname = "localhost"; // Server on-campus is "an ip not sure"
+    $username = "root";
+    $password = "";
+    $dbname = "sysdb"; // Server on-campus is "mariadb"
 
 // username and password need to be replaced by your username and password
 $hostname = "localhost";
@@ -17,35 +24,36 @@ $username = "root";
 $password = ""; // Default for xampp (if your using that)
 $dbname = "sysdb";
 
-// Create connection
-$link = mysqli_connect($hostname, $username, $password, $dbname);
-if(!$link) {
-  die("Connection failed:" . mysqli_connect_error());
-}
-echo "Connection successful\n";
+    if(!$link) {
+      die("Connection failed: " . mysql_error());
+    }
+    echo "Connection successful<p>\n";
 
 
-// Test query
-// $query = "SELECT * FROM PROFESSOR WHERE ssn='123456789'"; // Should post Professor Wang database if added
+    // Test query
+    // $query = "SELECT * FROM PROFESSOR WHERE ssn=" .$ssn;
+    // $result = $link->query($query);
+    // $row = $result->fetch_assoc();
+    // printf("SSN: %s<br>\n", $row["ssn"]);
+    // printf("NAME: %s<br>\n", $row["name"]);
+    // $result->free_result();
+    
+    include("src/models/Professor.php");
+    
+    $professor = new Professor($link);
+    
+    $result = $professor->getClassSchedule($ssn);
+    foreach($result as $row) {
+        printf("SNUM: %s, CLASSROOM: %s, BEGINTIME: %s, ENDTIME: %s, MEETINGDATE: %s\n", $row["snum"], $row["classroom"], $row["begintime"], $row["endtime"], $row["meetingdate"]);
+    }
 
-$query = "SELECT * FROM PROFESSOR WHERE ssn=$ssn";
-$result = $link->query($query);
-if(!$result) { // Doesnt work yet
-  echo "<link> <a href='http://localhost/input.html'>Back to main page</a> </link>";
-  die("Query failed: " . $link->error);
-}
+    printf("\n");
+    $result = $professor->getGradeDistribution('47389', 'CPSC332');
+    foreach($result as $row) {
+        printf("GRADE: %s, COUNT: %s\n", $row["grade"], $row["grade_count"]);
+    }
 
-$row = $result->fetch_assoc();
-
-printf("<p>ssn: %s\n</p>", $row["ssn"]);
-printf("<p>name: %s\n</p>", $row["name"]);
-
-echo "<p>Professor ", $row["name"], "</p>";
-
-echo "<link> <a href='http://localhost/input.html'>Back to main page</a> </link>";
-$result->free_result();
-$link->close();
-?>
-</body>
+    $link->close();
+    ?>
+  </body>
 </html>
-
