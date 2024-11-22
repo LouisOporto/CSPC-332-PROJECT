@@ -8,26 +8,25 @@ Response
 <body>
 <?php
 
-    // if($_POST["ssn"]) {
-    //     $ssn = $_POST["ssn"];
-    // }
-    $ssn = "123456789";
-    // username and password need to be replaced by your username and password
-    $hostname = "localhost"; // Server on-campus is "an ip not sure"
-    $username = "root";
-    $password = "";
-    $dbname = "sysdb"; // Server on-campus is "mariadb"
+// username and password need to be replaced by your username and password
+$hostname = "localhost"; // Server on-campus is "an ip not sure"
+$username = "root";
+$password = "";
+$dbname = "sysdb"; // Server on-campus is "mariadb"
 
-    if(!$link) {
-      die("Connection failed: " . mysql_error());
-    }
+$link = mysqli_connect($hostname, $username, $password, $dbname);
+
+if(!$link) {
+    die("Connection failed: " . mysql_error());
+}
     echo "Connection successful<p>\n";
 
     // Professor Queries
     include("src/models/Professor.php");
-    
     $professor = new Professor($link);
-    
+    // if($_POST["ssn"]) { $ssn = $_POST["ssn"]; }
+    $ssn = "123456789";
+
     $result = $professor->getClassSchedule($ssn);
     foreach($result as $row) {
         printf("SNUM: %s, CLASSROOM: %s, BEGINTIME: %s, ENDTIME: %s, MEETINGDATE: %s\n", $row["snum"], $row["classroom"], $row["begintime"], $row["endtime"], $row["meetingdate"]);
@@ -43,7 +42,7 @@ Response
 
     // Student Queries
     include("src/models/Student.php");
-    $cwid = 123;
+    $cwid = 123456788;
     $courseNum = 123;
 
     $student = new Student($link);
@@ -53,10 +52,10 @@ Response
     }
 
     printf('\n');
-    $result = $professor->getSectionsByCourse($courseNum);
-    foreach($result as $row) {
-        printf();
-    }
+    // $result = $professor->getSectionsByCourse($courseNum);
+    // foreach($result as $row) {
+    //     printf();
+    // }
 
     $link->close();
     ?>
