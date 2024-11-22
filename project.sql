@@ -12,7 +12,7 @@ CREATE TABLE PROFESSOR (
     salary numeric(7,2),
     title varchar(20),
     areacode int(3),
-    phonenumber int(10)
+    phonenumber numeric(10)
 );
 
 CREATE TABLE SECTIONS (
@@ -44,7 +44,7 @@ CREATE TABLE STUDENT (
 	cwid int(9) primary key,
     fname varchar(20),
     lname varchar(20),
-    phonenumber int(10),
+    phonenumber numeric(10),
     address varchar(20),
     majordeptnum char(4)
 );
@@ -52,7 +52,7 @@ CREATE TABLE STUDENT (
 CREATE TABLE DEPARTMENT (
 	dnum char(4) primary key,
     name varchar(20),
-    phonenumber int(10),
+    phonenumber numeric(10),
     officelocation varchar(20),
     chairpersonssn int(9)
 );
@@ -85,9 +85,9 @@ INSERT INTO PROFESSOR VALUES (
     'CA',
     'Fullerton',
     'Robin',
-    '90420',
-    'M',
-    70000,
+     90420,
+     M,
+    70000.00,
     'Teacher',
     1,
     5621231234
