@@ -18,26 +18,12 @@ Response
     $password = "";
     $dbname = "sysdb"; // Server on-campus is "mariadb"
 
-// username and password need to be replaced by your username and password
-$hostname = "localhost";
-$username = "root";
-$password = ""; // Default for xampp (if your using that)
-$dbname = "sysdb";
-
     if(!$link) {
       die("Connection failed: " . mysql_error());
     }
     echo "Connection successful<p>\n";
 
-
-    // Test query
-    // $query = "SELECT * FROM PROFESSOR WHERE ssn=" .$ssn;
-    // $result = $link->query($query);
-    // $row = $result->fetch_assoc();
-    // printf("SSN: %s<br>\n", $row["ssn"]);
-    // printf("NAME: %s<br>\n", $row["name"]);
-    // $result->free_result();
-    
+    // Professor Queries
     include("src/models/Professor.php");
     
     $professor = new Professor($link);
@@ -51,6 +37,25 @@ $dbname = "sysdb";
     $result = $professor->getGradeDistribution('47389', 'CPSC332');
     foreach($result as $row) {
         printf("GRADE: %s, COUNT: %s\n", $row["grade"], $row["grade_count"]);
+    }
+
+    printf("\n\n");
+
+    // Student Queries
+    include("src/models/Student.php");
+    $cwid = 123;
+    $courseNum = 123;
+
+    $student = new Student($link);
+    $result = $professor->getCoursesByStudent($cwid);
+    foreach($resut as $row) {
+        printf();
+    }
+
+    printf('\n');
+    $result = $professor->getSectionsByCourse($courseNum);
+    foreach($result as $row) {
+        printf();
     }
 
     $link->close();
