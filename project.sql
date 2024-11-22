@@ -1,32 +1,33 @@
 CREATE DATABASE sysdb;
+USE sysdb;
 
 CREATE TABLE PROFESSOR (
-	ssn numeric(9) primary key,
+	ssn int(9) primary key,
     name varchar(20),
     state char(2),
     city varchar(20),
     streetaddress varchar(20),
-    zipcode char(5),
+    zipcode int(5),
     sex enum('M','F'),
-    salary numeric(5),
+    salary numeric(7,2),
     title varchar(20),
-    areacode numeric(3),
-    phonenumber numeric(10)
+    areacode int(3),
+    phonenumber int(10)
 );
 
 CREATE TABLE SECTIONS (
-	snum numeric(5) primary key,
-    numseats numeric(2),
+	snum int(5) primary key,
+    numseats int(2),
     begintime time,
     endtime time,
-    classroom numeric(3),
+    classroom int(3),
     coursenum char(7),
-    profssn numeric(9)
+    profssn int(9)
 );
 
 CREATE TABLE RECORDS (
-	snum numeric(5),
-    cwid numeric(9),
+	snum int(5),
+    cwid int(9),
     grade char(2),
     primary key(snum, cwid)
 );
@@ -40,10 +41,10 @@ CREATE TABLE COURSE (
 );
 
 CREATE TABLE STUDENT (
-	cwid numeric(9) primary key,
+	cwid int(9) primary key,
     fname varchar(20),
     lname varchar(20),
-    phonenumber numeric(10),
+    phonenumber int(10),
     address varchar(20),
     majordeptnum char(4)
 );
@@ -51,23 +52,23 @@ CREATE TABLE STUDENT (
 CREATE TABLE DEPARTMENT (
 	dnum char(4) primary key,
     name varchar(20),
-    phonenumber numeric(10),
+    phonenumber int(10),
     officelocation varchar(20),
-    chairpersonssn numeric(9)
+    chairpersonssn int(9)
 );
 
 CREATE TABLE MINOR_IN (
-	studentcwid numeric(9) primary key,
+	studentcwid int(9) primary key,
     minordeptnum char(4)
 );
 
 CREATE TABLE COLLEGE_DEGREES (
-  	profssn numeric(9) primary key,
+  	profssn int(9) primary key,
     degree varchar(20)
 );
 
 CREATE TABLE MEETING_DAYS (
-	snum numeric(5),
+	snum int(5),
     meetingdate time
 );
 
