@@ -19,7 +19,7 @@ $link = mysqli_connect($hostname, $username, $password, $dbname);
 if(!$link) {
     die("Connection failed: " . mysql_error());
 }
-    echo "Connection successful<p>\n";
+    echo "Connection successful<p>\n\n";
 
     // Professor Queries
     include("src/models/Professor.php");
@@ -28,12 +28,14 @@ if(!$link) {
     $ssn = "123456789";
 
     $result = $professor->getClassSchedule($ssn);
+    printf("Professor: %s classes...\n", $ssn);
     foreach($result as $row) {
         printf("SNUM: %s, CLASSROOM: %s, BEGINTIME: %s, ENDTIME: %s, MEETINGDATE: %s\n", $row["snum"], $row["classroom"], $row["begintime"], $row["endtime"], $row["meetingdate"]);
     }
 
     printf("\n");
     $result = $professor->getGradeDistribution('47389', 'CPSC332');
+    printf("Grade Counts in section: 47389, course: CPSC332\n");
     foreach($result as $row) {
         printf("GRADE: %s, COUNT: %s\n", $row["grade"], $row["grade_count"]);
     }
@@ -46,16 +48,24 @@ if(!$link) {
     $courseNum = 123;
 
     $student = new Student($link);
-    $result = $professor->getCoursesByStudent($cwid);
-    foreach($resut as $row) {
-        printf();
+    $result = $student->getCoursesByStudent($cwid);
+    printf("Student: %s courses taken...\n", $cwid);
+    foreach($result as $row) {
+        printf("COURSE: %s, GRADE: %s\n", $row["coursenum"], $row["grade"]);
     }
 
     printf('\n');
-    // $result = $professor->getSectionsByCourse($courseNum);
-    // foreach($result as $row) {
-    //     printf();
-    // }
+    $result = $professor->getSectionsByCourse($courseNum);
+    printf("Course: %s here are its sections and information");
+    foreach($result as $row) {
+        printf("SECTION: %d, CLASSROOM: %d, MEETIN DAY: %s, BEGIN TIME: %s, END TIME: %s, NUMOFSTUDENTS: %d", 
+            $row["section"],
+            $row["classroom"],
+            $row["meeting_day"],
+            $row["begin_time"],
+            $row["end_time"],
+            $row["num_of_students"]);
+    }
 
     $link->close();
     ?>
