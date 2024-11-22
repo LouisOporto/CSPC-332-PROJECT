@@ -71,7 +71,7 @@ CREATE TABLE COLLEGE_DEGREES (
 
 CREATE TABLE MEETING_DAYS (
 	snum int(5),
-    meetingdate time
+    meetingdate date
 );
 
 CREATE TABLE PREQUISITE_COURSES (
