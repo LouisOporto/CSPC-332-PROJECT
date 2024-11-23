@@ -8,21 +8,24 @@ FROM PROFESSOR;
 
 -- PROFESSOR -- 
 -- Given the social security of a professor, list the titles, classrooms, meeting days and time of his/her classes.
-SELECT SECTIONS.snum, SECTIONS.classroom, SECTIONS.begintime, SECTIONS.endtime, meetingdate
-FROM SECTIONS
-JOIN MEETING_DAYS MD ON MD.snum = SECTIONS.snum
-JOIN COURSE ON COURSE.cnum = SECTIONS.coursenum
-WHERE SECTIONS.profssn = 123456789;
+SELECT S.snum, S.classroom, S.begintime, S.endtime, MD.meetingdate
+FROM SECTIONS AS S, MEETING_DAYS AS MD, COURSE AS C
+WHERE S.profssn = 123456789 AND MD.snum = S.snum AND C.cnum = S.coursenum;
 
 -- Given a course number and a section number, count how many students  get each distinct, i.e. 'A', 'A-', 'B+', 'B', 'B', etc.->
-SELECT grade, COUNT(*) AS grade_count
-FROM RECORDS, COURSE, SECTIONS
-WHERE RECORDS.snum = '47389' AND COURSE.cnum = 'CPSC332' AND SECTIONS.coursenum = COURSE.cnum
-GROUP BY grade;
+SELECT R.grade, COUNT(*) AS grade_count
+FROM RECORDS AS R, COURSE AS C, SECTIONS AS S
+WHERE R.snum = '47389' AND C.cnum = 'CPSC332' AND S.coursenum = C.cnum AND S.snum = R.snum
+GROUP BY R.grade;
 
 -- STUDENT
 -- Given the CWID of a student, list courses they took and grades
-SELECT SECTIONS.coursenum, RECORDS.grade
-FROM RECORDS
-JOIN SECTIONS ON RECORDS.snum = SECTIONS.snum
-WHERE RECORDS.cwid = 123456788
+SELECT S.coursenum, R.grade
+FROM RECORDS AS R, SECTIONS AS S
+WHERE R.cwid = 123456788 AND S.snum = R.snum;
+
+-- Given a course number list the sections of the course, including classrooms, meeting day, time, number of students
+SELECT S.snum, S.classroom, MD.meetingdate, S.begintime, S.endtime, COUNT(*) AS enrolledcount
+FROM RECORDS AS R, SECTIONS AS S, MEETING_DAYS AS MD
+WHERE S.coursenum = 'CPSC332' AND S.snum = R.snum AND MD.snum = S.snum
+GROUP BY S.snum, MD.meetingdate;
