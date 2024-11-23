@@ -45,7 +45,7 @@ if(!$link) {
     // Student Queries
     include("src/models/Student.php");
     $cwid = 123456788;
-    $courseNum = 123;
+    $courseNum = 'CPSC332';
 
     $student = new Student($link);
     $result = $student->getCoursesByStudent($cwid);
@@ -55,16 +55,16 @@ if(!$link) {
     }
 
     printf('\n');
-    $result = $professor->getSectionsByCourse($courseNum);
-    printf("Course: %s here are its sections and information");
+    $result = $student->getSectionsByCourse($courseNum);
+    printf("Course: %s here are its sections and information\n", $courseNum);
     foreach($result as $row) {
-        printf("SECTION: %d, CLASSROOM: %d, MEETIN DAY: %s, BEGIN TIME: %s, END TIME: %s, NUMOFSTUDENTS: %d", 
-            $row["section"],
+        printf("SECTION: %d, CLASSROOM: %d, MEETIN DAY: %s, BEGIN TIME: %s, END TIME: %s, ENROLLEDSTUDENTS: %d\n", 
+            $row["snum"],
             $row["classroom"],
-            $row["meeting_day"],
-            $row["begin_time"],
-            $row["end_time"],
-            $row["num_of_students"]);
+            $row["meetingdate"],
+            $row["begintime"],
+            $row["endtime"],
+            $row["enrolledcount"]);
     }
 
     $link->close();
