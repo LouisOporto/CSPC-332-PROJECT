@@ -10,11 +10,9 @@ class Professor {
     public function getClassSchedule($ssn) {
       // Prepare SQL query.
       $stmt = $this->db->prepare("
-        SELECT SECTIONS.snum, SECTIONS.classroom, SECTIONS.begintime, SECTIONS.endtime, meetingdate
-        FROM SECTIONS
-        JOIN MEETING_DAYS MD ON MD.snum = SECTIONS.snum
-        JOIN COURSE ON COURSE.cnum = SECTIONS.coursenum
-        WHERE SECTIONS.profssn = ?
+        SELECT S.snum, S.classroom, S.begintime, S.endtime, MD.meetingdate
+        FROM SECTIONS AS S, MEETING_DAYS AS MD, COURSE AS C
+        WHERE S.profssn = ? AND MD.snum = S.snum AND S.coursenum = C.cnum
       ");
       // Prepare and bind parameters.
       $stmt->bind_param("s", $ssn);
@@ -30,10 +28,10 @@ class Professor {
     public function getGradeDistribution($sectionNum, $courseNum) {
       // Prepare the SQL query
       $stmt = $this->db->prepare("
-        SELECT grade, COUNT(*) AS grade_count
-        FROM RECORDS, COURSE, SECTIONS
-        WHERE RECORDS.snum = ? AND COURSE.cnum = ? AND SECTIONS.coursenum = COURSE.cnum
-        GROUP BY grade
+        SELECT R.grade, COUNT(*) AS grade_count
+        FROM RECORDS AS R, COURSE AS C, SECTIONS AS S
+        WHERE R.snum = ? AND C.cnum = ? AND S.coursenum = C.cnum AND S.snum = R.snum
+        GROUP BY R.grade
       ");
       // Prepare and bind parameters.
       $stmt->bind_param("ss", $sectionNum, $courseNum);
