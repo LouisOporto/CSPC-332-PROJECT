@@ -80,4 +80,4 @@ CREATE TABLE PREQUISITE_COURSES (
 );
 
 -- Quick Remove certain tabs
-DROP DATABASE sysdb;
+-- DROP DATABASE sysdb;
