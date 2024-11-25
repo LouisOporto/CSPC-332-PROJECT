@@ -2,13 +2,13 @@
 
 ``` bash
 /cpsc332_project_database/
-├──project.sql
+├──project.sql                              # SQL schema for database
 │
-├──data.sql
+├──data.sql                                 # SQL datapoints for this instance
 │
-├──query.sql
+├──query.sql                                # SQL queries tests
 │
-├──index.html
+├──index.html                               # Main driver for all submit forms for queries
 │
 ├── /src/
 │   ├── /controller/
