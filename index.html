@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<div>
+<h1>Professor Queries</h1>
+<h2>Enter the professors SSN of the professor to get the section details. ex ssn=123456789</h2>
+<form action="src/controller/get_prof_section.php" method="POST">
+Professor SSN:<input type="text" name="ssn" />
+<input type ="submit">
+</form>
+<br />
+
+<h2>Enter course number and section number to get studnet grades. ex: course=CPSC332 section=47389 </h2>
+<form action="src/controller/get_grade.php" method="POST">
+Course Number:<input type="text" name="course_num" />
+Section Number:<input type="text" name="section_num" />
+<input type ="submit">
+</form>
+<br />
+
+<h1>Student Queries</h1>
+<div>
+<h2>Enter the student CWID to get the courses they took. ex. cwid=12345688</h2>
+<form action="src/controller/get_course.php" method="POST">
+Student CWID:<input type="text" name="cwid" />
+<input type ="submit">
+</form>
+<br />
+</div>
+
+<h2>Enter the course number to view a list of sections. ex. course=CSPC332</h2>
+<form action="src/controller/get_course_section.php" method="POST">
+Course Number:<input type="text" name="course_num" />
+<input type ="submit">
+</form>
+<br />
+</div>
+
+</body>
+</html>
