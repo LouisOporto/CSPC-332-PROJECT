@@ -35,6 +35,6 @@ if(!$link) {
 
     $link->close();
 ?>
-<a href="../../input.html">Return to submit form</a>
+<a href="../../index.html">Return to submit form</a>
 </body>
 </html>
