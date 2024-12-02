@@ -300,7 +300,7 @@ INSERT INTO MEETING_DAYS VALUES (
 
 INSERT INTO MEETING_DAYS VALUES (
     32443,
-    '2024-05-23'
+    '2024-05-25'
 );
 
 -- 20 enrollment records --
