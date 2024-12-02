@@ -66,12 +66,13 @@ INSERT INTO SECTIONS VALUES (
 
 INSERT INTO SECTIONS VALUES (
     47387,
+    30,
     '21:00:00',
     '22:15:00',
     483,
     'CPSC484',
     123456788
-)
+);
 
 INSERT INTO SECTIONS VALUES (
 	45665,
@@ -101,7 +102,7 @@ INSERT INTO SECTIONS VALUES (
     201,
     'PSYC201',
     604654701
-)
+);
 
 -- 2 department --
 INSERT INTO DEPARTMENT VALUES (
@@ -139,15 +140,15 @@ INSERT INTO COURSE VALUES (
 
 INSERT INTO COURSE VALUES (
     'PSYC101',
-    'Introduction Psychology',
+    'Intro Psychology',
     3,
     'Book of psychology',
     'PYSC'
 );
 
 INSERT INTO COURSE VALUES (
-    'PSYC 201',
-    'Introduction to Statistics in Psychology',
+    'PSYC201',
+    'Intro to Statistics in Psychology',
     3,
     'Statistics in Psychology',
     'PSYC'
@@ -194,6 +195,7 @@ INSERT INTO STUDENT VALUES (
     123456886,
     'David',
     'Kim',
+    1232222323,
     'la mirada',
     'PSYC'
 );
@@ -202,6 +204,7 @@ INSERT INTO STUDENT VALUES (
     333444232,
     'Nathan',
     'Nguyen',
+    4564563434,
     'diamond bar',
     'CPSC'
 );
@@ -210,6 +213,7 @@ INSERT INTO STUDENT VALUES (
     333444233,
     'Curys',
     'Lang',
+    9879877777,
     'fullerton',
     'CPSC'
 );
@@ -218,6 +222,7 @@ INSERT INTO STUDENT VALUES (
     333444234,
     'sofia',
     'lee',
+    4567892323,
     'buena park',
     'PSYC'
 );
@@ -283,17 +288,17 @@ INSERT INTO MEETING_DAYS VALUES (
     '2024-09-12'
 );
 
-INSERT INTO METTING_DAYS VALUES (
+INSERT INTO MEETING_DAYS VALUES (
     32443,
     '2024-05-23'
 );
 
-INSERT INTO METTING_DAYS VALUES (
+INSERT INTO MEETING_DAYS VALUES (
     32443,
     '2024-05-24'
 );
 
-INSERT INTO METTING_DAYS VALUES (
+INSERT INTO MEETING_DAYS VALUES (
     32443,
     '2024-05-23'
 );
@@ -356,7 +361,7 @@ INSERT INTO RECORDS VALUES (
 
 INSERT INTO RECORDS VALUES (
 	47388,
-	123456788,
+	123456799,
     'A'
 );
 
@@ -437,12 +442,12 @@ INSERT INTO COLLEGE_DEGREES VALUES (
 );
 
 -- Prerequisite Courses --
-INSERT TABLE PREQUISITE_COURSES VALUES (
+INSERT INTO PREQUISITE_COURSES VALUES (
     'PSYC201',
     'PSYC101'
 );
 
-INSERT TABLE PREQUISITE_COURSES VALUES (
+INSERT INTO PREQUISITE_COURSES VALUES (
     'CPSC332',
     'CPSC335'
 );
