@@ -30,8 +30,8 @@ class Professor {
       // Prepare the SQL query
       $stmt = $this->db->prepare("
         SELECT R.grade, COUNT(*) AS grade_count
-        FROM RECORDS AS R, COURSE AS C, SECTIONS AS S
-        WHERE R.snum = ? AND C.cnum = ? AND S.coursenum = C.cnum AND S.snum = R.snum
+        FROM RECORDS AS R, SECTIONS AS S
+        WHERE R.snum = ? AND S.courseum = ? AND S.snum = R.snum
         GROUP BY R.grade
       ");
       // Prepare and bind parameters.
