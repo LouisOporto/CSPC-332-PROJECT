@@ -9,10 +9,10 @@ Professor Sections
 <?php
 
 // username and password need to be replaced by your username and password
-$hostname = "localhost"; // Server on-campus is "an ip not sure"
-$username = "root";
-$password = "";
-$dbname = "sysdb"; // Server on-campus is "mariadb"
+$hostname = "mariadb";
+$username = "cs332g15";
+$password = "13FB5sFT";
+$dbname = "cs332g15";
 
 $link = mysqli_connect($hostname, $username, $password, $dbname);
 
