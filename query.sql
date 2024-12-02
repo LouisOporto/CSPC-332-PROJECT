@@ -10,7 +10,8 @@ FROM PROFESSOR;
 -- Given the social security of a professor, list the titles, classrooms, meeting days and time of his/her classes.
 SELECT S.snum, S.classroom, S.begintime, S.endtime, MD.meetingdate
 FROM SECTIONS AS S, MEETING_DAYS AS MD, COURSE AS C
-WHERE S.profssn = 604654701 AND MD.snum = S.snum AND C.cnum = S.coursenum;
+WHERE S.profssn = 604654701 AND MD.snum = S.snum
+GROUP BY S.snum, MD.meetingdate; 
 
 -- Given a course number and a section number, count how many students  get each distinct, i.e. 'A', 'A-', 'B+', 'B', 'B', etc.->
 SELECT R.grade, COUNT(*) AS grade_count
