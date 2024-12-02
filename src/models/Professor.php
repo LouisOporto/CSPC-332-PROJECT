@@ -12,7 +12,8 @@ class Professor {
       $stmt = $this->db->prepare("
         SELECT S.snum, S.classroom, S.begintime, S.endtime, MD.meetingdate
         FROM SECTIONS AS S, MEETING_DAYS AS MD, COURSE AS C
-        WHERE S.profssn = ? AND MD.snum = S.snum AND S.coursenum = C.cnum
+        WHERE S.profssn = ? AND MD.snum = S.snum
+        GROUP BY S.snum, MD.meetingdate
       ");
       // Prepare and bind parameters.
       $stmt->bind_param("s", $ssn);
